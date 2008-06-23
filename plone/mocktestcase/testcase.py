@@ -3,6 +3,8 @@ import mocker
 import zope.component
 import zope.component.testing
 
+from plone.mocktestcase import dummy
+
 class MockTestCase(mocker.MockerTestCase):
     """Base class for mocker-based mock tests. There are convenience methods
     to make mock testing easier.
@@ -18,6 +20,11 @@ class MockTestCase(mocker.MockerTestCase):
     
     def replay(self):
         self.mocker.replay()
+    
+    # Helper to create a dummy object with a particular __dict__
+    
+    def create_dummy(self, **kw):
+        return dummy.Dummy(**kw)
     
     # Help register mock components. The tear-down method will
     # wipe the registry each time.
@@ -56,3 +63,15 @@ class MockTestCase(mocker.MockerTestCase):
         that provides IFoo.
         """
         return mocker.MATCH(lambda x: interface.providedBy(x))
+
+    def match_type(self, type):
+        """A function parameter matches that checks whether the function
+        argument is an instance of the given type, e.g.:
+
+            some_mock = self.mocker.mock()
+            some_mock.foo(self.match_isinstance(basestring))
+        
+        This will ensure that foo() is called on some_mock with an object
+        that is a string
+        """
+        return mocker.MATCH(lambda x: isinstance(x, type))
