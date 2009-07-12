@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0b3
+-----
+
+* Added mock_tool() helper.
+
 1.0b2
 -----
 

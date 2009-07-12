@@ -10,11 +10,14 @@ class MockTestCase(mocker.MockerTestCase):
     to make mock testing easier.
     """
     
+    _getToolByName_mock = None
+    
     # Ensure that we tear down the CA after each test method
 
     def tearDown(self):
         super(MockTestCase, self).tearDown()
         zope.component.testing.tearDown(self)
+        self._getToolByName_mock = None
     
     # For the lazy
     
@@ -49,6 +52,15 @@ class MockTestCase(mocker.MockerTestCase):
         """Register the mock as a utility providing the given interface 
         """
         zope.component.provideHandler(factory=mock, adapts=adapts)
+    
+    def mock_tool(self, mock, name):
+        """Register a mock tool that will be returned when getToolByName()
+        is called.
+        """
+        
+        if self._getToolByName_mock is None:
+            self._getToolByName_mock = self.mocker.replace('Products.CMFCore.utils.getToolByName')
+        self.expect(self._getToolByName_mock(mocker.ANY, name)).result(mock)
     
     # Matcher functions
     
