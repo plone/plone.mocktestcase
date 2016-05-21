@@ -1,1 +1,1 @@
-from testcase import MockTestCase
+from plone.mocktestcase.testcase import MockTestCase
