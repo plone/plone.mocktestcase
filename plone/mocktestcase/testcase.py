@@ -4,6 +4,14 @@ from plone.mocktestcase import dummy
 import mocker
 import zope.component
 import zope.component.testing
+import zope.proxy
+
+
+class ComponentProxy(zope.proxy.ProxyBase):
+
+    @property
+    def __component_name__(self):
+        raise AttributeError('mock attribute error')
 
 
 class MockTestCase(mocker.MockerTestCase):
@@ -36,6 +44,8 @@ class MockTestCase(mocker.MockerTestCase):
     def mock_utility(self, mock, provides, name=u""):
         """Register the mock as a utility providing the given interface
         """
+        if not name:
+            mock = ComponentProxy(mock)
         zope.component.provideUtility(
             provides=provides, component=mock, name=name)
 
@@ -43,6 +53,8 @@ class MockTestCase(mocker.MockerTestCase):
         """Register the mock as an adapter providing the given interface
         and adapting the given interface(s)
         """
+        if not name:
+            mock = ComponentProxy(mock)
         zope.component.provideAdapter(
             factory=mock, adapts=adapts, provides=provides, name=name)
 
@@ -61,7 +73,6 @@ class MockTestCase(mocker.MockerTestCase):
         """Register a mock tool that will be returned when getToolByName()
         is called.
         """
-
         if self._getToolByName_mock is None:
             self._getToolByName_mock = self.mocker.replace(
                 'Products.CMFCore.utils.getToolByName')

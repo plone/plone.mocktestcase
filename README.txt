@@ -1,6 +1,8 @@
 Introduction
 ============
 
+LEGACY: Do not use this any longer, better use the Python mock module!
+
 This package contains a unittest test class based on the one from the
 ``Mocker`` mock library (http://labix.org/mocker).
 
@@ -81,3 +83,16 @@ The following helper methods are available:
      A custom matcher that can be used to check whether an argument to a mock 
      call is if the given type. Uses isinstance(arg, type).
 
+Changes
+=======
+
+1.0.b5
+------
+
+- fix to work with zope interface after https://github.com/zopefoundation/zope.interface/commit/79a266200384fa53fb3810ed316a94394166f4e3
+  [jensens]
+
+1.0.b4
+------
+
+- no log 

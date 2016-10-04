@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0b4'
+version = '1.0b5'
 
 setup(name='plone.mocktestcase',
       version=version,
@@ -28,6 +28,7 @@ setup(name='plone.mocktestcase',
       install_requires=[
           'setuptools',
           'mocker',
+          'zope.proxy',
           # 'zope.component',
           # -*- Extra requirements: -*-
       ],
