@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.0
----
+1.0 (unreleased)
+----------------
+
+- fix to work with zope interface after https://github.com/zopefoundation/zope.interface/commit/79a266200384fa53fb3810ed316a94394166f4e3
+  [jensens]
 
 * Fix relative import to fix Python 3 compatibility.
   [datakurre]
