@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class Dummy(object):
     """Dummy object with arbitrary attributes
     """
