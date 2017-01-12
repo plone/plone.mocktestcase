@@ -10,15 +10,18 @@ Changelog
 * Fix relative import to fix Python 3 compatibility.
   [datakurre]
 
+
 1.0b3
 -----
 
 * Added mock_tool() helper.
 
+
 1.0b2
 -----
 
 * Minor amendments to mock Zope 3 component support
+
 
 1.0b1
 -----
